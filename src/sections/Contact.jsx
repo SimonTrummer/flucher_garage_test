@@ -85,9 +85,13 @@ function ContactForm() {
     const via = event.nativeEvent.submitter?.value
     if (via === 'mail') {
       window.location.href = mailLink(`Anfrage: ${topic}`, text)
-    } else {
-      window.open(whatsappLink(text), '_blank', 'noopener,noreferrer')
+      return
     }
+    // A new tab for WhatsApp; if a pop-up blocker refuses, open it in this tab instead.
+    const url = whatsappLink(text)
+    const tab = window.open(url, '_blank')
+    if (tab) tab.opener = null
+    else window.location.href = url
   }
 
   return (
