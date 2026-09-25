@@ -12,34 +12,36 @@
   clip-path: polygon(0 0, 100% var(--slant), 100% 100%, 0 calc(100% - var(--slant)));
 }
 
-/* Diagonal livery graphics like on the bike's shrouds */
+/* Diagonal livery graphics like on the bike's shrouds. They sit in the bike's
+   stage, fade in from the left and run off the right edge of the screen. */
 .livery {
   position: absolute;
-  inset: 0 0 auto;
-  height: 66%;
-  overflow: hidden;
+  top: -12%;
+  bottom: -18%;
+  left: -14%;
+  right: -50vw;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 22%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 22%);
 }
 
 .band,
 .bandFluo {
   position: absolute;
-  left: -10%;
-  width: 120%;
+  left: 0;
+  width: 140%;
   transform: rotate(-14deg);
   transform-origin: 0 0;
 }
 
 .band {
-  bottom: -30%;
+  bottom: -38%;
   height: 46%;
-  background: linear-gradient(90deg, rgb(12 26 120 / 0.55), rgb(12 26 120 / 0.2));
+  background: linear-gradient(90deg, rgb(12 26 120 / 0.2), rgb(12 26 120 / 0.55));
 }
 
 .bandFluo {
-  bottom: 12%;
+  bottom: 14%;
   height: 12px;
   background: var(--fluo);
   opacity: 0.85;

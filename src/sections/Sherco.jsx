@@ -46,11 +46,6 @@ export default function Sherco() {
       data-nav-theme="dark"
       aria-labelledby="sherco-title"
     >
-      <div className={styles.livery} aria-hidden="true">
-        <span className={styles.band} />
-        <span className={styles.bandFluo} />
-      </div>
-
       <div className={`container ${styles.inner}`}>
         <div className={styles.grid}>
           <div className={styles.copy}>
@@ -76,6 +71,11 @@ export default function Sherco() {
           </div>
 
           <div className={styles.stage} onPointerMove={onPointerMove} onPointerLeave={onPointerLeave}>
+            {/* Diagonal livery graphics like on the bike's shrouds, only behind the bike */}
+            <div className={styles.livery} aria-hidden="true">
+              <span className={styles.band} />
+              <span className={styles.bandFluo} />
+            </div>
             <m.span className={styles.bigNumber} style={{ y: numberY, x: numberX }} aria-hidden="true">
               50
             </m.span>
