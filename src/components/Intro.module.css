@@ -1,0 +1,93 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  cursor: pointer;
+}
+
+.door {
+  position: absolute;
+  inset: 0 0 -2px;
+  display: grid;
+  place-items: center;
+  /* Roller-door slats in the tan of the logo: flat face, bevel, groove, highlight. */
+  background:
+    radial-gradient(120% 90% at 50% 20%, rgb(255 255 255 / 0.18), rgb(255 255 255 / 0) 60%),
+    linear-gradient(180deg, rgb(0 0 0 / 0) 55%, rgb(40 30 15 / 0.22) 100%),
+    repeating-linear-gradient(
+      180deg,
+      #d6c5a7 0 26px,
+      #cbb998 26px 36px,
+      #a8966f 36px 40px,
+      #7f6f53 40px 42px,
+      #e4d7bf 42px 43px
+    );
+  box-shadow: 0 24px 60px rgb(10 12 18 / 0.35);
+  transform: translateY(0);
+  transition: transform 1.15s cubic-bezier(0.72, 0, 0.24, 1);
+  will-change: transform;
+}
+
+.intro[data-opening='true'] .door {
+  transform: translateY(calc(-100% - 60px));
+}
+
+.plate {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  color: #34353b;
+  transition:
+    opacity 0.35s ease,
+    transform 0.6s var(--ease-out);
+}
+
+.intro[data-opening='true'] .plate {
+  opacity: 0.85;
+  transform: translateY(-12px);
+}
+
+.mark {
+  width: clamp(84px, 11vw, 124px);
+  height: auto;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 4px rgb(255 255 255 / 0.28),
+    0 10px 30px rgb(40 30 15 / 0.35);
+}
+
+.wordmark {
+  font-size: clamp(17px, 2.2vw, 24px);
+}
+
+.lip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22px;
+  background: linear-gradient(180deg, #3a3b41, #1e1f24);
+  box-shadow: 0 -2px 0 rgb(255 255 255 / 0.18) inset;
+}
+
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: var(--fluo);
+  transform-origin: 0 50%;
+}
+
+.handle {
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  width: 92px;
+  height: 8px;
+  margin-left: -46px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #111216, #2d2e34);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.18);
+}

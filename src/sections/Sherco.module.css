@@ -1,0 +1,262 @@
+.section {
+  --focus: #fff;
+  --eyebrow: var(--fluo);
+  position: relative;
+  padding-top: calc(var(--slant) + var(--section-y) * 0.85);
+  padding-bottom: calc(var(--slant) + var(--section-y) * 0.85);
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(80% 70% at 78% 40%, #3a63ff 0%, rgb(58 99 255 / 0) 60%),
+    linear-gradient(160deg, #2a52f0 0%, var(--sherco) 42%, var(--sherco-deep) 100%);
+  clip-path: polygon(0 0, 100% var(--slant), 100% 100%, 0 calc(100% - var(--slant)));
+}
+
+/* Diagonal livery graphics like on the bike's shrouds */
+.livery {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 66%;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+}
+
+.band,
+.bandFluo {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  transform: rotate(-14deg);
+  transform-origin: 0 0;
+}
+
+.band {
+  bottom: -30%;
+  height: 46%;
+  background: linear-gradient(90deg, rgb(12 26 120 / 0.55), rgb(12 26 120 / 0.2));
+}
+
+.bandFluo {
+  bottom: 12%;
+  height: 12px;
+  background: var(--fluo);
+  opacity: 0.85;
+}
+
+.inner {
+  position: relative;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.copy {
+  display: grid;
+  gap: 22px;
+  align-content: start;
+}
+
+.title {
+  font-size: clamp(2.8rem, 1.4rem + 6vw, 6.6rem);
+  font-stretch: 118%;
+}
+
+.text {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+}
+
+.lead {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  max-width: 30em;
+  color: rgb(255 255 255 / 0.92);
+}
+
+.note {
+  max-width: 30em;
+  color: rgb(255 255 255 / 0.76);
+  margin-bottom: 10px;
+}
+
+/* ---------- the bike ---------- */
+
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(320px, 42vw, 560px);
+  perspective: 900px;
+}
+
+.bigNumber {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -56%;
+  font-family: var(--font-display);
+  font-size: clamp(12rem, 30vw, 30rem);
+  font-weight: 900;
+  font-style: italic;
+  font-stretch: 150%;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 2px rgb(217 245 31 / 0.75);
+  user-select: none;
+  pointer-events: none;
+}
+
+.floor {
+  position: absolute;
+  left: 50%;
+  bottom: 9%;
+  width: min(84%, 520px);
+  height: 58px;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(4 10 48 / 0.7), rgb(4 10 48 / 0));
+  filter: blur(4px);
+}
+
+.bike {
+  position: relative;
+  width: min(100%, 550px);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.bike img {
+  width: 100%;
+  filter: drop-shadow(0 30px 40px rgb(4 10 48 / 0.45));
+}
+
+.tag {
+  position: absolute;
+  top: 8%;
+  right: 4%;
+  padding: 10px 18px;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 900;
+  font-style: italic;
+  font-stretch: 110%;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fluo-ink);
+  background: var(--fluo);
+  transform: rotate(6deg) skewX(-10deg);
+  box-shadow: 0 12px 30px rgb(4 10 48 / 0.35);
+}
+
+/* ---------- instrument cluster ---------- */
+
+.cluster {
+  margin-top: clamp(56px, 7vw, 96px);
+  display: grid;
+  gap: 18px;
+}
+
+.clusterCaption {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 700;
+  font-stretch: 90%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.75);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid rgb(255 255 255 / 0.28);
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 26px clamp(12px, 2.4vw, 32px) 8px;
+  border-left: 1px solid rgb(255 255 255 / 0.18);
+}
+
+.fact:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.factLabel {
+  font-family: var(--font-display);
+  font-size: var(--step--2);
+  font-weight: 700;
+  font-stretch: 92%;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.78);
+  max-width: 22em;
+}
+
+.factValue {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0;
+}
+
+.factValue svg {
+  max-width: 200px;
+  margin-top: -6px;
+}
+
+.factNumber {
+  font-family: var(--font-display);
+  font-size: clamp(3.6rem, 2rem + 5vw, 6.4rem);
+  font-weight: 900;
+  font-style: italic;
+  font-stretch: 120%;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.factUnit {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 800;
+  font-stretch: 100%;
+  color: var(--fluo);
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stage {
+    order: -1;
+    min-height: clamp(280px, 72vw, 460px);
+  }
+}
+
+@media (max-width: 640px) {
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fact {
+    border-left: 0;
+    padding-left: 0;
+    border-bottom: 1px solid rgb(255 255 255 / 0.18);
+  }
+
+  .factValue {
+    min-height: 0;
+  }
+}

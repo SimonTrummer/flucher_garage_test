@@ -1,0 +1,137 @@
+.svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* The container tilts around its base … */
+.tilt {
+  transform-box: view-box;
+  transform-origin: 60px 216px;
+  transition: transform 0.7s var(--ease-spring);
+}
+
+/* … while the liquid turns back the other way, so its surface stays level. */
+.liquid {
+  transform-box: view-box;
+  transform-origin: 60px 216px;
+  transition: transform 0.7s var(--ease-spring);
+}
+
+.fill {
+  transform: translateY(calc(var(--level) + var(--rise, 0px)));
+  transition: transform 1.6s var(--ease-out);
+}
+
+.svg[data-filled='false'] {
+  --rise: 64px;
+}
+
+.glass {
+  fill: rgb(214 222 245 / 0.06);
+}
+
+.can {
+  fill: #2b3243;
+}
+
+.outline {
+  fill: none;
+  stroke: rgb(226 232 248 / 0.5);
+  stroke-width: 1.6;
+}
+
+.handle {
+  fill: none;
+  stroke: rgb(226 232 248 / 0.5);
+  stroke-width: 1.6;
+}
+
+.cap {
+  fill: #20242f;
+  stroke: rgb(226 232 248 / 0.35);
+  stroke-width: 1.2;
+}
+
+.highlight {
+  stroke: rgb(255 255 255 / 0.35);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.wave {
+  fill: var(--liquid);
+  animation: wave 2.6s linear infinite;
+}
+
+.waveBack {
+  opacity: 0.45;
+  animation-duration: 3.8s;
+  animation-direction: reverse;
+  translate: 0 -3px;
+}
+
+.slosh {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  transition: transform 0.6s var(--ease-spring);
+}
+
+/* Hover / tap */
+.svg[data-active='true'] .tilt {
+  transform: rotate(-10deg);
+}
+
+.svg[data-active='true'] .liquid {
+  transform: rotate(10deg);
+}
+
+.svg[data-active='true'] .slosh {
+  transform: scaleY(2.4);
+}
+
+.svg[data-active='true'] .mist {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+}
+
+@keyframes wave {
+  to {
+    transform: translateX(-60px);
+  }
+}
+
+.sticker rect {
+  fill: #f2f4f8;
+}
+
+.sticker .stickerBand {
+  fill: var(--liquid);
+}
+
+.sticker text {
+  fill: #11141c;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 900;
+  font-style: italic;
+  font-stretch: 96%;
+  text-anchor: middle;
+}
+
+.mist {
+  fill: rgb(226 232 248 / 0.35);
+  opacity: 0;
+  transform-box: view-box;
+  transform-origin: 50px 36px;
+  transform: scale(0.4) translateX(10px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.6s var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave {
+    animation: none;
+  }
+}

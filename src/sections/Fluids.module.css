@@ -1,0 +1,122 @@
+.section {
+  --eyebrow: var(--oil);
+  position: relative;
+  padding-block: var(--section-y);
+  background: radial-gradient(70% 50% at 50% 62%, rgb(232 163 61 / 0.1), rgb(232 163 61 / 0) 70%), var(--asphalt);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(28px, 5vw, 80px);
+  margin-bottom: clamp(48px, 7vw, 96px);
+}
+
+.headTitle {
+  display: grid;
+  gap: 20px;
+}
+
+.title {
+  font-size: clamp(2.5rem, 1.2rem + 5.4vw, 6rem);
+}
+
+/* ---------- the shelf ---------- */
+
+.shelf {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  row-gap: clamp(48px, 6vw, 72px);
+}
+
+.item {
+  --pad: clamp(6px, 1.4vw, 20px);
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  padding-inline: var(--pad);
+  text-align: center;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bottle {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 132px);
+  margin-bottom: -2px;
+}
+
+/* Shelf board: the cells touch, so the pieces read as one board per row */
+.plank {
+  justify-self: stretch;
+  height: 12px;
+  margin-inline: calc(-1 * var(--pad));
+  background: linear-gradient(180deg, #3b4357 0%, #272d3b 45%, #161a24 100%);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.12) inset,
+    0 20px 30px -12px rgb(0 0 0 / 0.85);
+}
+
+.name {
+  max-width: 100%;
+  margin-top: 22px;
+  font-size: var(--step-1);
+  overflow-wrap: break-word;
+  hyphens: manual;
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: 104%;
+  line-height: 1.1;
+}
+
+.spec {
+  margin-top: 6px;
+  font-size: var(--step--1);
+  color: var(--fog);
+  line-height: 1.4;
+}
+
+.foot {
+  margin-top: clamp(56px, 7vw, 88px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.note {
+  color: var(--fog);
+  max-width: 36em;
+}
+
+@media (max-width: 1080px) {
+  .shelf {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 960px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .shelf {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bottle {
+    width: min(100%, 112px);
+  }
+
+  .name {
+    font-size: var(--step-0);
+  }
+}

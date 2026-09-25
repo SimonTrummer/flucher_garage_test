@@ -1,0 +1,225 @@
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+  background: var(--asphalt);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(28px, 5vw, 80px);
+  margin-bottom: clamp(40px, 6vw, 80px);
+}
+
+.headTitle {
+  display: grid;
+  gap: 20px;
+}
+
+.title {
+  font-size: clamp(2.5rem, 1.2rem + 5.6vw, 6rem);
+}
+
+/* Mud-speckled letters … */
+.mud {
+  display: inline-block;
+  padding: 0.08em 0.14em 0.06em 0.02em;
+  margin: -0.08em -0.14em -0.06em -0.02em;
+  background:
+    radial-gradient(circle at 18% 32%, #5a4a36 0 0.05em, transparent 0.055em),
+    radial-gradient(circle at 64% 58%, #4a3d2d 0 0.035em, transparent 0.04em),
+    radial-gradient(circle at 38% 78%, #6b5942 0 0.045em, transparent 0.05em),
+    radial-gradient(circle at 82% 24%, #54442f 0 0.03em, transparent 0.035em),
+    linear-gradient(170deg, #b5a38a 0%, #8f7d64 55%, #75634b 100%);
+  background-size:
+    0.62em 0.7em,
+    0.5em 0.46em,
+    0.74em 0.66em,
+    0.4em 0.52em,
+    100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* … and polished chrome */
+.shine {
+  display: inline-block;
+  padding: 0.08em 0.14em 0.06em 0.02em;
+  margin: -0.08em -0.14em -0.06em -0.02em;
+  background: linear-gradient(176deg, #ffffff 0%, #dfe5f1 34%, #8e98ad 50%, #eef2f9 58%, #b9c2d4 78%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.headText {
+  display: grid;
+  gap: 28px;
+  justify-items: start;
+  padding-bottom: 6px;
+}
+
+/* ---------- scope ---------- */
+
+.scope {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 44px);
+  margin-top: clamp(56px, 7vw, 104px);
+}
+
+.scopeItem {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line-strong);
+}
+
+.scopeIcon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  background: var(--carbon-2);
+  color: var(--fluo);
+}
+
+.scopeIcon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.scopeTitle {
+  font-size: var(--step-2);
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: 110%;
+}
+
+.scopeText {
+  color: var(--fog);
+  max-width: 28em;
+}
+
+/* ---------- process: a real sequence, so it is numbered ---------- */
+
+.process {
+  margin-top: clamp(72px, 9vw, 136px);
+  display: grid;
+  gap: clamp(28px, 4vw, 48px);
+}
+
+.processTitle {
+  font-size: var(--step-2);
+  font-weight: 800;
+  font-stretch: 110%;
+  font-style: italic;
+}
+
+.stepsWrap {
+  position: relative;
+}
+
+.track {
+  position: absolute;
+  top: 27px;
+  left: 28px;
+  right: 28px;
+  height: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.trackFill {
+  position: absolute;
+  inset: 0;
+  background: var(--fluo);
+  transform-origin: 0 50%;
+}
+
+.steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.step {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.stepNo {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background: var(--asphalt);
+  border: 1.5px solid var(--line-strong);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 900;
+  font-style: italic;
+  font-variant-numeric: tabular-nums;
+  color: var(--fluo);
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 800;
+  font-stretch: 104%;
+  line-height: 1.15;
+}
+
+.stepText {
+  color: var(--fog);
+  font-size: var(--step--1);
+  line-height: 1.55;
+  max-width: 24em;
+}
+
+@media (max-width: 960px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .scope {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 36px;
+  }
+
+  .track {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .step {
+    grid-template-columns: 56px minmax(0, 1fr);
+    column-gap: 18px;
+    row-gap: 4px;
+  }
+
+  .stepNo {
+    grid-row: span 2;
+    margin-bottom: 0;
+  }
+}

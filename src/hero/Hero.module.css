@@ -1,0 +1,370 @@
+/* ---------- layout: a pinned studio the page scrolls through ---------- */
+
+.hero {
+  --hero-scroll: 190svh;
+  position: relative;
+  z-index: 0;
+  height: calc(100svh + var(--hero-scroll));
+  background: var(--asphalt);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--asphalt);
+}
+
+.stage {
+  --focus: var(--sherco);
+  --eyebrow: var(--sherco);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--studio);
+  color: var(--studio-ink);
+  transform-origin: 50% 0%;
+  transform: translateY(calc(var(--cover, 0) * -2.5%)) scale(calc(1 - var(--cover, 0) * 0.07));
+  border-radius: calc(var(--cover, 0) * 32px);
+}
+
+/* Soft photo-studio light: brighter where the bike stands, a hint of floor at the bottom. */
+.backdrop {
+  --spot-x: 66%;
+  --spot-y: 56%;
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      52% 64% at var(--spot-x) var(--spot-y),
+      #ffffff 0%,
+      rgb(255 255 255 / 0.7) 38%,
+      rgb(255 255 255 / 0) 72%
+    ),
+    linear-gradient(180deg, #f5f6f8 0%, #eff1f4 58%, #e3e6ec 100%);
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out);
+}
+
+.stage:not([data-phase='loading']) .canvas {
+  opacity: 1;
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: var(--asphalt);
+  opacity: calc(var(--cover, 0) * 0.5);
+  pointer-events: none;
+}
+
+/* ---------- text ---------- */
+
+.content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: var(--header-h);
+  padding-bottom: clamp(28px, 7vh, 88px);
+}
+
+.text {
+  container-type: inline-size;
+  max-width: min(41vw, 590px);
+  transform: translateY(calc(var(--turn, 0) * -4vh));
+}
+
+/* Before the door opens, the text waits; during the roll-in it appears in the bike's wake. */
+.text[data-intro='wait'] {
+  clip-path: inset(0 100% 0 0);
+}
+
+.text[data-intro='wake'] {
+  clip-path: polygon(
+    -80px -80px,
+    calc(var(--wake, 0px) + 44px) -80px,
+    calc(var(--wake, 0px) - 44px) calc(100% + 80px),
+    -80px calc(100% + 80px)
+  );
+}
+
+.eyebrow {
+  font-size: var(--step--2);
+}
+
+.title {
+  margin-top: clamp(14px, 2.4vh, 26px);
+}
+
+.words {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: var(--font-display);
+  /* "GLANZ." is ~4.8em wide: 20.5cqi keeps it inside the text column */
+  font-size: min(8.1vw, 14.2vh, 20.5cqi);
+  font-style: italic;
+  font-weight: 900;
+  line-height: 0.84;
+  letter-spacing: -0.012em;
+  text-transform: uppercase;
+}
+
+/* Room for italic overhang and the umlaut dots, so background-clip:text never cuts them. */
+.words > span {
+  display: inline-block;
+  padding: 0.1em 0.16em 0.04em 0.02em;
+  margin: -0.1em -0.16em -0.04em -0.02em;
+}
+
+/* GLANZ – a highlight runs across the letters like light over fresh paint */
+.glanz {
+  font-stretch: 112%;
+  background: linear-gradient(
+      104deg,
+      var(--studio-ink) 0 41%,
+      #5f78f0 46.5%,
+      #ffffff 50%,
+      #5f78f0 53.5%,
+      var(--studio-ink) 59% 100%
+    )
+    100% 0 / 330% 100% no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: sheen 7.5s var(--ease-in-out) 3.4s infinite;
+}
+
+@keyframes sheen {
+  0% {
+    background-position: 100% 0;
+  }
+  28%,
+  100% {
+    background-position: 0% 0;
+  }
+}
+
+/* GAS – Sherco blue, stretches wider while you scroll (see Hero.jsx) */
+.gas {
+  color: var(--sherco);
+  font-stretch: 100%;
+}
+
+/* ÖL – filled to the middle with sloshing oil */
+.oel {
+  --level: 0.5em;
+  font-stretch: 108%;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 130 400' preserveAspectRatio='none'%3E%3Cpath d='M0 12C21 3 44 3 65 12S109 21 130 12V400H0Z' fill='%23e8a33d'/%3E%3C/svg%3E")
+      0 var(--level) / 1.3em 4em repeat-x,
+    linear-gradient(var(--studio-ink), var(--studio-ink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: slosh 2.8s linear infinite;
+}
+
+@keyframes slosh {
+  to {
+    background-position:
+      -1.3em var(--level),
+      0 0;
+  }
+}
+
+.lead {
+  margin-top: clamp(16px, 2.8vh, 30px);
+  max-width: 25em;
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--studio-fog);
+}
+
+.actions {
+  margin-top: clamp(20px, 3.4vh, 38px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 14px;
+}
+
+.badge {
+  margin-top: clamp(18px, 3vh, 32px);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.9em;
+  flex-wrap: wrap;
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+
+.badgeKicker {
+  font-size: var(--step--2);
+  font-weight: 700;
+  font-stretch: 90%;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--studio-fog);
+}
+
+.badgeText {
+  position: relative;
+  padding: 0.3em 0.75em;
+  font-size: var(--step--1);
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: 105%;
+  color: var(--fluo-ink);
+  isolation: isolate;
+}
+
+.badgeText::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--fluo);
+  transform: skewX(-14deg);
+}
+
+.scrollHint {
+  position: absolute;
+  z-index: 2;
+  left: max(var(--gutter), calc((100% - var(--maxw)) / 2));
+  bottom: clamp(18px, 4vh, 40px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--studio-fog);
+  opacity: calc(1 - var(--turn, 0) * 12);
+  transition: opacity 0.3s linear;
+}
+
+.scrollLine {
+  position: relative;
+  width: 48px;
+  height: 2px;
+  overflow: hidden;
+  background: rgb(11 14 23 / 0.16);
+}
+
+.scrollLine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--sherco);
+  transform: translateX(-100%);
+  animation: hint 2.4s var(--ease-in-out) infinite;
+}
+
+@keyframes hint {
+  65%,
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.stage[data-phase='loading'] .scrollHint {
+  opacity: 0;
+}
+
+/* ---------- tall screens: headline on top, bike underneath ---------- */
+
+@media (max-aspect-ratio: 28 / 25) {
+  .hero {
+    --hero-scroll: 150svh;
+  }
+
+  .backdrop {
+    --spot-x: 50%;
+    --spot-y: 74%;
+  }
+
+  .content {
+    justify-content: flex-start;
+    padding-top: calc(var(--header-h) + clamp(12px, 3vh, 40px));
+  }
+
+  .text {
+    max-width: 38rem;
+    transform: none;
+  }
+
+  .words {
+    font-size: min(15.5vw, 7.8vh, 124px, 20.5cqi);
+  }
+
+  .secondary {
+    display: none;
+  }
+
+  .lead {
+    font-size: var(--step-0);
+    max-width: 26em;
+  }
+
+  .lead,
+  .actions {
+    opacity: calc(1 - (var(--turn, 0) - 0.18) * 3.2);
+    transition: opacity 0.2s linear;
+  }
+
+  .badge,
+  .scrollHint {
+    display: none;
+  }
+}
+
+@media (max-aspect-ratio: 28 / 25) and (max-height: 700px) {
+  .lead {
+    display: none;
+  }
+}
+
+/* Short landscape screens (small laptops, phones on their side): keep the essentials */
+@media (min-aspect-ratio: 28 / 25) and (max-height: 800px) {
+  .badge,
+  .scrollHint {
+    display: none;
+  }
+
+  .words {
+    font-size: min(8.1vw, 12.6vh, 20.5cqi);
+  }
+}
+
+@media (min-aspect-ratio: 28 / 25) and (max-height: 620px) {
+  .lead,
+  .secondary {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    --hero-scroll: 0px;
+  }
+
+  .glanz,
+  .oel {
+    animation: none;
+  }
+}

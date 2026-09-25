@@ -1,0 +1,5 @@
+dist
+dist-embed
+node_modules
+public/sequence
+package-lock.json

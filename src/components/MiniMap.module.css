@@ -1,0 +1,123 @@
+.map {
+  display: grid;
+  gap: 10px;
+}
+
+.map svg {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-m);
+  background: radial-gradient(60% 80% at 80% 70%, rgb(217 245 31 / 0.06), rgb(217 245 31 / 0) 70%), var(--carbon);
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.grid {
+  stroke: rgb(214 222 245 / 0.08);
+  stroke-width: 1;
+}
+
+.coord {
+  fill: var(--fog-2);
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.route {
+  stroke: var(--fluo);
+  stroke-width: 2;
+  stroke-dasharray: 1 0;
+  fill: none;
+}
+
+.distance {
+  fill: var(--fluo);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 800;
+  font-style: italic;
+  text-anchor: middle;
+}
+
+.city {
+  fill: var(--asphalt);
+  stroke: var(--mist);
+  stroke-width: 2;
+}
+
+.cityLabel,
+.hereLabel {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.cityLabel {
+  fill: var(--mist);
+}
+
+.here {
+  fill: var(--fluo);
+  stroke: var(--asphalt);
+  stroke-width: 3;
+}
+
+.hereLabel {
+  fill: var(--fluo);
+}
+
+.pulse {
+  fill: none;
+  stroke: var(--fluo);
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse 2.4s var(--ease-out) infinite;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+.scale line {
+  stroke: var(--fog);
+  stroke-width: 1.5;
+}
+
+.scale text,
+.north text {
+  fill: var(--fog);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.north path {
+  fill: var(--fog);
+}
+
+.north text {
+  text-anchor: middle;
+}
+
+.caption {
+  font-size: var(--step--2);
+  color: var(--fog-2);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    display: none;
+  }
+}

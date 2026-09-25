@@ -1,0 +1,204 @@
+<!doctype html>
+<!--
+  Template for public/img/og-image.jpg (the picture shown when the site is shared
+  on WhatsApp, Facebook & co.). Rendered at 1200 × 630 by scripts/make-og-image.cjs.
+-->
+<html lang="de-AT">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: 'Anybody';
+        font-style: italic;
+        font-weight: 100 900;
+        font-stretch: 50% 150%;
+        src: url(../node_modules/@fontsource-variable/anybody/files/anybody-latin-wdth-italic.woff2) format('woff2');
+      }
+      @font-face {
+        font-family: 'Anybody';
+        font-style: normal;
+        font-weight: 100 900;
+        font-stretch: 50% 150%;
+        src: url(../node_modules/@fontsource-variable/anybody/files/anybody-latin-wdth-normal.woff2) format('woff2');
+      }
+      @font-face {
+        font-family: 'Great Vibes';
+        src: url(../node_modules/@fontsource/great-vibes/files/great-vibes-latin-400-normal.woff2) format('woff2');
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        font-family: 'Anybody', sans-serif;
+        background: #0a0c12;
+      }
+      .studio {
+        position: absolute;
+        inset: 0 0 118px;
+        background:
+          radial-gradient(48% 70% at 70% 58%, #fff 0%, rgb(255 255 255 / 0) 72%),
+          linear-gradient(180deg, #f5f6f8, #e6e9ee);
+        overflow: hidden;
+      }
+      .bike {
+        position: absolute;
+        right: -168px;
+        bottom: -8px;
+        width: 1020px;
+        mix-blend-mode: multiply;
+      }
+      .copy {
+        position: absolute;
+        left: 64px;
+        top: 52px;
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 15px;
+        font-weight: 700;
+        font-stretch: 88%;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #2349e8;
+      }
+      .eyebrow::before {
+        content: '';
+        width: 30px;
+        height: 7px;
+        background: currentColor;
+        transform: skewX(-28deg);
+      }
+      .words {
+        margin-top: 18px;
+        display: flex;
+        flex-direction: column;
+        font-size: 112px;
+        font-weight: 900;
+        font-style: italic;
+        line-height: 0.84;
+        text-transform: uppercase;
+        color: #0b0e17;
+      }
+      .words span {
+        display: inline-block;
+        padding: 0.1em 0.16em 0.04em 0.02em;
+        margin: -0.1em -0.16em -0.04em -0.02em;
+      }
+      .glanz {
+        font-stretch: 112%;
+      }
+      .gas {
+        font-stretch: 128%;
+        color: #2349e8;
+      }
+      .oel {
+        font-stretch: 108%;
+        background:
+          linear-gradient(180deg, transparent 58%, #e8a33d 58%),
+          linear-gradient(#0b0e17, #0b0e17);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .bar {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 150px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: 0 64px 34px;
+        background: #0a0c12;
+        clip-path: polygon(0 32px, 100% 0, 100% 100%, 0 100%);
+        color: #eef1f8;
+      }
+      .stripe {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 150px;
+        height: 0;
+      }
+      .stripe::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -2px;
+        height: 42px;
+        background: #d9f51f;
+        clip-path: polygon(0 calc(100% - 8px), 100% 0, 100% 8px, 0 100%);
+        transform: translateY(0);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .wordmark {
+        display: grid;
+        justify-items: center;
+        line-height: 1;
+      }
+      .script {
+        font-family: 'Great Vibes', cursive;
+        font-size: 50px;
+        -webkit-text-stroke: 1.6px currentColor;
+      }
+      .caps {
+        margin-top: -2px;
+        padding-left: 0.62em;
+        font-size: 13px;
+        font-weight: 800;
+        font-stretch: 125%;
+        letter-spacing: 0.62em;
+        text-transform: uppercase;
+        color: #cdbb9c;
+      }
+      .services {
+        text-align: right;
+        font-size: 19px;
+        font-weight: 700;
+        font-stretch: 95%;
+        letter-spacing: 0.02em;
+        line-height: 1.45;
+      }
+      .services small {
+        display: block;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #d9f51f;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="studio">
+      <img class="bike" src="../public/sequence/100.webp" alt="" />
+      <div class="copy">
+        <p class="eyebrow">Sankt Marein bei Graz · Steiermark</p>
+        <p class="words"><span class="glanz">Glanz.</span><span class="gas">Gas.</span><span class="oel">Öl.</span></p>
+      </div>
+    </div>
+    <div class="stripe"></div>
+    <div class="bar">
+      <div class="brand">
+        <img src="../public/favicon.svg" width="64" height="64" alt="" />
+        <div class="wordmark"><span class="script">Flucher’s</span><span class="caps">Garage</span></div>
+      </div>
+      <p class="services">
+        <small>Offizieller Sherco-Händler</small>
+        Autoaufbereitung · Sherco 50 ccm · Schmier- &amp; Betriebsstoffe
+      </p>
+    </div>
+  </body>
+</html>

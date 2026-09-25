@@ -1,0 +1,27 @@
+.wordmark {
+  display: inline-grid;
+  justify-items: center;
+  line-height: 1;
+}
+
+.script {
+  font-family: var(--font-script);
+  font-size: 1.9em;
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: 0;
+  /* Great Vibes is hairline-thin; a stroke in the text colour gives it the weight of the logo */
+  -webkit-text-stroke: 0.035em currentColor;
+  paint-order: stroke fill;
+}
+
+.caps {
+  margin-top: -0.05em;
+  padding-left: 0.62em;
+  font-family: var(--font-display);
+  font-size: 0.5em;
+  font-weight: 800;
+  font-stretch: 125%;
+  letter-spacing: 0.62em;
+  text-transform: uppercase;
+}

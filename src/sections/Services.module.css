@@ -1,0 +1,190 @@
+.services {
+  /* How far this section slides over the pinned hero before both scroll on together */
+  --curtain: 72svh;
+  position: relative;
+  z-index: 2;
+  margin-top: calc(-1 * var(--curtain));
+  padding-top: calc(var(--slant) + clamp(72px, 9vw, 136px));
+  padding-bottom: var(--section-y);
+  background: var(--asphalt);
+  clip-path: polygon(0 var(--slant), 100% 0, 100% 100%, 0 100%);
+}
+
+.stripe {
+  position: absolute;
+  inset: 0 0 auto;
+  height: calc(var(--slant) + 9px);
+  background: var(--fluo);
+  clip-path: polygon(0 calc(100% - 9px), 100% 0, 100% 9px, 0 100%);
+}
+
+.head {
+  display: grid;
+  gap: 18px;
+  margin-bottom: clamp(36px, 5vw, 64px);
+}
+
+.title {
+  max-width: 14em;
+}
+
+.bands {
+  border-bottom: 1px solid var(--line);
+}
+
+.band {
+  --tone: var(--mist);
+  --tone-ink: var(--asphalt);
+  container-type: inline-size;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(16px, 3vw, 48px);
+  padding: clamp(22px, 3vw, 38px) clamp(4px, 1vw, 16px);
+  border-top: 1px solid var(--line);
+  color: var(--mist);
+  text-decoration: none;
+  isolation: isolate;
+  overflow: hidden;
+  transition: color 0.45s var(--ease-out);
+}
+
+.band[data-tone='chrome'] {
+  --tone: linear-gradient(100deg, #f5f7fb 0%, #c3cad8 48%, #eef1f6 70%, #b7bfce 100%);
+}
+
+.band[data-tone='sherco'] {
+  --tone: var(--sherco);
+  --tone-ink: #fff;
+}
+
+.band[data-tone='oil'] {
+  --tone: var(--oil);
+}
+
+/* A tone-coloured stripe sweeps in from the left on hover */
+.band::before {
+  content: '';
+  position: absolute;
+  inset: 0 -8%;
+  z-index: -1;
+  background: var(--tone);
+  transform: translateX(-104%) skewX(-18deg);
+  transition: transform 0.6s var(--ease-out);
+}
+
+.word {
+  font-family: var(--font-display);
+  /* "GLANZ." is the longest word: ~4.6em wide, so 9.2cqi keeps it inside its column */
+  font-size: clamp(3rem, 9.2cqi, 7.6rem);
+  font-weight: 900;
+  font-style: italic;
+  font-stretch: 125%;
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(238 241 248 / 0.42);
+  transition:
+    color 0.45s var(--ease-out),
+    -webkit-text-stroke-color 0.45s var(--ease-out),
+    transform 0.6s var(--ease-out);
+}
+
+.meta {
+  display: grid;
+  gap: 6px;
+  max-width: 30em;
+}
+
+.bandTitle {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 800;
+  font-stretch: 104%;
+  line-height: 1.1;
+}
+
+.bandText {
+  color: var(--fog);
+  transition: color 0.45s var(--ease-out);
+}
+
+.go {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 50%;
+  transition:
+    transform 0.5s var(--ease-out),
+    border-color 0.45s,
+    background-color 0.45s;
+}
+
+.go svg {
+  width: 22px;
+  height: 22px;
+}
+
+@media (hover: hover) {
+  .band:hover {
+    color: var(--tone-ink);
+  }
+
+  .band:hover::before {
+    transform: translateX(0) skewX(-18deg);
+  }
+
+  .band:hover .word {
+    color: var(--tone-ink);
+    -webkit-text-stroke-color: transparent;
+    transform: translateX(10px);
+  }
+
+  .band:hover .bandText {
+    color: var(--tone-ink);
+  }
+
+  .band:hover .go {
+    border-color: currentColor;
+    transform: rotate(-45deg);
+  }
+}
+
+.band:focus-visible {
+  outline-offset: -3px;
+}
+
+@media (max-width: 860px) {
+  .band {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'word go'
+      'meta meta';
+    row-gap: 14px;
+  }
+
+  .word {
+    grid-area: word;
+    font-size: clamp(3rem, 15.5cqi, 6rem);
+  }
+
+  .meta {
+    grid-area: meta;
+  }
+
+  .go {
+    grid-area: go;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services {
+    --curtain: var(--slant);
+  }
+}

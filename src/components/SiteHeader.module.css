@@ -1,0 +1,264 @@
+.header {
+  --hdr-fg: var(--studio-ink);
+  --hdr-bg: rgb(243 244 246 / 0.74);
+  --hdr-line: rgb(11 14 23 / 0.08);
+  --focus: var(--sherco);
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  padding-top: env(safe-area-inset-top, 0px);
+  color: var(--hdr-fg);
+  transition:
+    color 0.35s ease,
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+}
+
+.header[data-theme='dark'] {
+  --hdr-fg: var(--mist);
+  --hdr-bg: rgb(10 12 18 / 0.74);
+  --hdr-line: var(--line);
+  --focus: var(--fluo);
+}
+
+.header[data-hidden='true'] {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--hdr-bg);
+  border-bottom: 1px solid var(--hdr-line);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+  opacity: 0;
+  transition:
+    opacity 0.35s ease,
+    background-color 0.35s ease;
+}
+
+.header[data-scrolled='true']::before {
+  opacity: 1;
+}
+
+.bar {
+  position: relative;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.4vw, 36px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: auto;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 999px;
+}
+
+.mark {
+  width: 40px;
+  height: 40px;
+  flex: none;
+}
+
+.wordmark {
+  font-size: 13px;
+}
+
+.nav ul {
+  display: flex;
+  gap: clamp(18px, 2.2vw, 34px);
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  padding: 10px 0;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 700;
+  font-stretch: 94%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  height: 3px;
+  background: currentColor;
+  transform: skewX(-24deg) scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.4s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .link:hover::after {
+    transform: skewX(-24deg) scaleX(1);
+  }
+}
+
+.cta {
+  min-height: 42px;
+  padding-inline: 1.15em;
+}
+
+.menuButton {
+  display: none;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+}
+
+.menuButton svg {
+  width: 22px;
+  height: 22px;
+}
+
+@media (max-width: 1080px) {
+  .nav {
+    display: none;
+  }
+
+  .menuButton {
+    display: grid;
+  }
+}
+
+@media (max-width: 560px) {
+  .cta {
+    display: none;
+  }
+
+  .wordmark {
+    font-size: 12px;
+  }
+}
+
+/* ---------- full-screen menu: rolls down like the garage door ---------- */
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: max(24px, env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  color: var(--mist);
+  background:
+    repeating-linear-gradient(180deg, rgb(255 255 255 / 0) 0 46px, rgb(255 255 255 / 0.035) 46px 48px), var(--asphalt);
+  animation: roll-down 0.55s var(--ease-out) both;
+}
+
+.menu[hidden] {
+  display: none;
+}
+
+@keyframes roll-down {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.menuBar {
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: none;
+}
+
+.menuBrand {
+  display: inline-flex;
+}
+
+.menu .menuButton {
+  display: grid;
+}
+
+.menuNav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-block: 24px;
+}
+
+.menuNav ul {
+  display: grid;
+  gap: 6px;
+}
+
+.menuNav a {
+  display: inline-block;
+  padding: 4px 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 8.4vw, 3.4rem);
+  font-weight: 900;
+  font-style: italic;
+  font-stretch: 100%;
+  overflow-wrap: anywhere;
+  line-height: 1.05;
+  text-decoration: none;
+  text-transform: uppercase;
+  animation: menu-in 0.6s var(--ease-out) both;
+  animation-delay: calc(0.12s + var(--i) * 0.05s);
+}
+
+.menuNav a:hover,
+.menuNav a:focus-visible {
+  color: var(--fluo);
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+.menuFoot {
+  display: grid;
+  gap: 20px;
+  justify-items: start;
+  flex: none;
+}
+
+.menuLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  color: var(--fog);
+}
+
+.menuLinks a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.menuLinks svg {
+  width: 20px;
+  height: 20px;
+}
